@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">metronome</string>
+    <string name="to_disconnect_client">покинуть комнату</string>
+    <string name="to_connect_client">присоедениться к комнате</string>
+    <string name="to_start_server">создать комнату</string>
+    <string name="to_stop_server">закрыть комнату</string>
+    <string name="to_start_metronome">играть</string>
+    <string name="to_stop_metronome">остановить</string>
+</resources>

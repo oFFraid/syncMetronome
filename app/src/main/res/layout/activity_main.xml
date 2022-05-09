@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="30dp"
+        tools:context=".MainActivity">
+
+        <ImageView
+            android:id="@+id/qrCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="qr code"
+            app:layout_constraintBottom_toTopOf="@+id/clientBtn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <Button
+            android:id="@+id/clientBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onClientClick"
+            android:text="@string/to_connect_client"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/serverBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:onClick="onServerClick"
+            android:text="@string/to_start_server"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/clientBtn" />
+
+        <Button
+            android:id="@+id/metronomeBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="metronomeBtn"
+            android:text="@string/to_start_metronome"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/serverBtn" />
+
+        <com.google.android.material.slider.Slider
+            android:id="@+id/rangeBpm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:labelBehavior="floating"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/metronomeBtn"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <TextView
+            android:id="@+id/bpmText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="bpm"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/rangeBpm"
+            app:layout_constraintTop_toBottomOf="@+id/rangeBpm" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
