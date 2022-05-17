@@ -16,7 +16,7 @@ public class NTPClient {
         return offset;
     }
 
-    private volatile Long offset;
+    private volatile Long offset = 0L;
 
     public void exec(String serverName) throws Exception {
         if (serverName.trim().equals("")) {
@@ -32,16 +32,6 @@ public class NTPClient {
             this.timeInfo = timeInfo;
             this.offset = timeInfo.getOffset();
         }
-
-  /*      // This system NTP time
-        TimeStamp systemNtpTime = TimeStamp.getCurrentTime();
-        System.out.println("System time:\t" + systemNtpTime + "  " + systemNtpTime.toDateString());
-
-        // Calculate the remote server NTP time
-        long currentTime = System.currentTimeMillis();
-        TimeStamp atomicNtpTime = TimeStamp.getNtpTime(currentTime + this.offset);
-
-        System.out.println("Atomic time:\t" + atomicNtpTime + "  " + atomicNtpTime.toDateString());*/
     }
 
     public boolean isComputed() {

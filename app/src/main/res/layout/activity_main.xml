@@ -14,7 +14,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="qr code"
-            app:layout_constraintBottom_toTopOf="@+id/clientBtn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -24,13 +23,15 @@
             android:id="@+id/clientBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="50dp"
             android:onClick="onClientClick"
             android:text="@string/to_connect_client"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            />
 
         <Button
             android:id="@+id/serverBtn"
@@ -44,14 +45,16 @@
 
         <Button
             android:id="@+id/metronomeBtn"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:onClick="metronomeBtn"
+            android:padding="10dp"
             android:text="@string/to_start_metronome"
+            android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/serverBtn" />
+            app:layout_constraintTop_toBottomOf="@+id/rangeBpm" />
 
         <com.google.android.material.slider.Slider
             android:id="@+id/rangeBpm"
@@ -60,18 +63,39 @@
             app:labelBehavior="floating"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.916"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/metronomeBtn"
+            app:layout_constraintTop_toBottomOf="@+id/serverBtn"
             tools:ignore="SpeakableTextPresentCheck" />
 
         <TextView
             android:id="@+id/bpmText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="sans-serif"
             android:text="bpm"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/rangeBpm"
-            app:layout_constraintTop_toBottomOf="@+id/rangeBpm" />
+            android:textSize="48sp"
+            app:layout_constraintBottom_toTopOf="@+id/rangeBpm"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/textView"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/serverBtn" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="bpm"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toTopOf="@+id/rangeBpm"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/bpmText"
+            app:layout_constraintTop_toBottomOf="@+id/serverBtn" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

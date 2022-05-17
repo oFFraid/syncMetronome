@@ -6,9 +6,12 @@ import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 import android.content.Context;
+import android.media.AudioFormat;
 import android.media.AudioManager;
+import android.media.AudioTrack;
 import android.media.SoundPool;
 import android.media.AudioAttributes;
+import android.media.ToneGenerator;
 import android.util.Log;
 
 import yau.src.metronome.Const;
@@ -33,7 +36,7 @@ public class Metronome {
 
     private final Runnable tik = () -> {
         Log.i("TICK", System.currentTimeMillis() + "");
-        soundPool.play(1, 1, 1, 1, 0, 1.0f);
+        soundPool.play(1, 1, 1, 2, 0, 1.0f);
     };
 
     public Metronome(Context context) {
@@ -48,17 +51,11 @@ public class Metronome {
     private void initializeSoundPool() {
         // Use the new SoundPool builder on newer version of android
         this.soundPool = new SoundPool.Builder()
-                .setMaxStreams(1)
-                .setAudioAttributes(new AudioAttributes.Builder()
-                        .setFlags(AudioAttributes.FLAG_AUDIBILITY_ENFORCED)
-                        .setLegacyStreamType(AudioManager.STREAM_MUSIC)
-                        .setUsage(AudioAttributes.USAGE_MEDIA)
-                        .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
-                        .build())
+                .setMaxStreams(10)
                 .build();
         soundPool.setOnLoadCompleteListener((SoundPool var1, int var2, int var3) -> currentState = MetronomeState.STOPPED);
         int soundResourceId = R.raw.sound2;
-        this.soundPool.load(this.context, soundResourceId, 1);
+        soundPool.load(context, soundResourceId, 2);
     }
 
     public void onHostResume() {
@@ -95,9 +92,6 @@ public class Metronome {
     }
 
     public void stop() {
-        Date date = new Date();
-        Log.i("METRONOME STOP", date.toString());
-
         if (this.currentState == MetronomeState.PLAYING) {
             this.scheduledFuture.cancel(false);
             this.currentState = MetronomeState.STOPPED;

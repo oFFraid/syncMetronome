@@ -1,9 +1,6 @@
 package yau.src.metronome.utils;
 
-import androidx.lifecycle.LifecycleOwner;
-
 import java.util.ArrayList;
-import java.util.EventListener;
 import java.util.Iterator;
 import java.util.List;
 

@@ -27,10 +27,6 @@ public class NTPServer implements Runnable {
     private boolean started;
     private DatagramSocket socket;
 
-    public NTPServer() {
-        this(NtpV3Packet.NTP_PORT);
-    }
-
     public NTPServer(final int port) {
         if (port < 0) {
             throw new IllegalArgumentException();
@@ -92,14 +88,10 @@ public class NTPServer implements Runnable {
         return running;
     }
 
-    public boolean isStarted() {
-        return started;
-    }
-
     @Override
     public void run() {
         running = true;
-        final byte buffer[] = new byte[48];
+        final byte[] buffer = new byte[48];
         final DatagramPacket request = new DatagramPacket(buffer, buffer.length);
         do {
             try {

@@ -15,18 +15,9 @@ public class ServerMessage {
         this.t2 = t2;
     }
 
-    public ServerMessage(String sender) {
-        this.sender = sender;
-    }
-
     public ServerMessage(String sender, ClientMessage clientMessage) {
         this.sender = sender;
         this.clientMessage = clientMessage;
     }
 
-    public ServerMessage(String sender, String message, ClientMessage clientMessage) {
-        this.sender = sender;
-        this.message = message;
-        this.clientMessage = clientMessage;
-    }
 }

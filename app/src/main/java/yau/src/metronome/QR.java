@@ -18,13 +18,17 @@ import com.journeyapps.barcodescanner.ScanIntentResult;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import yau.src.metronome.utils.Listener;
+
 public class QR implements ActivityResultCallback<ScanIntentResult> {
     Context context;
     CarrierMessagingService.ResultCallback<URI> callback;
+    Listener cbNotQR;
 
-    public QR(Context ctx, CarrierMessagingService.ResultCallback<URI> callback) {
+    public QR(Context ctx, CarrierMessagingService.ResultCallback<URI> callback, Listener cbNotQR) {
         context = ctx;
         this.callback = callback;
+        this.cbNotQR = cbNotQR;
     }
 
     public static Bitmap generateQrCode(String text) throws WriterException {
@@ -36,8 +40,10 @@ public class QR implements ActivityResultCallback<ScanIntentResult> {
         if (result.getContents() == null) {
             Intent originalIntent = result.getOriginalIntent();
             if (originalIntent == null) {
+                cbNotQR.submit(null);
                 Toast.makeText(context, "Отменено", Toast.LENGTH_LONG).show();
             } else if (originalIntent.hasExtra(Intents.Scan.MISSING_CAMERA_PERMISSION)) {
+                cbNotQR.submit(null);
                 Toast.makeText(context, "Отменено из-за отсутствия разрешения камеры", Toast.LENGTH_LONG).show();
             }
         } else {
@@ -46,6 +52,7 @@ public class QR implements ActivityResultCallback<ScanIntentResult> {
                 URI uri = new URI(decodedQr);
                 callback.onReceiveResult(uri);
             } catch (URISyntaxException | RemoteException e) {
+                cbNotQR.submit(null);
                 Toast.makeText(context, "Ошибка чтения QR!", Toast.LENGTH_SHORT).show();
             }
         }
